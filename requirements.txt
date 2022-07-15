@@ -1,2 +1,2 @@
 mysql-connector-python==8.0.29
-streamlit-authenticator==0.2.1
+streamlit-authenticator
