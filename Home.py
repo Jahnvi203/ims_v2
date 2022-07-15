@@ -23,23 +23,6 @@ def run_query(query):
         cur.execute(query)
         return cur.fetchall()
 
-names = ['Jahnvi Raj Singh', 'Ben Low']
-emails = ['jahnvi.singh@rttechlaw.com', 'ben.low@rttechlaw.com']
-passwords = ['123', '456']
-hashed_passwords = stauth.hasher(passwords).generate()
-
-authenticator = stauth.authenticate(names, emails, hashed_passwords, 'Jahnvi203', '83582042', cookie_expiry_days = 30)
-
-name, authentication_status = authenticator.login('Login', 'sidebar')
-
-if authentication_status:
-    st.write('Welcome *%s*' % (name))
- # your application
-elif authentication_status == False:
-    st.error('Username/password is incorrect')
-elif authentication_status == None:
-    st.warning('Please enter your username and password')
-
-# users_rows = run_query("select * from users")
-# for row in users_rows:
-#     st.write(f"{row[0]}'s email is {row[1]}")
+users_rows = run_query("select * from users")
+for row in users_rows:
+    st.write(f"{row[0]}'s email is {row[1]}")
