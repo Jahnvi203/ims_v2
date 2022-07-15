@@ -9,3 +9,4 @@ import altair as alt
 from datetime import datetime as dt
 
 st.title("Hello")
+st.text_input("Name")
