@@ -20,8 +20,9 @@ def run_query(query):
         cur.execute(query)
         return cur.fetchall()
 
-users_rows = run_query("select * from users")
+# users_rows = run_query("select * from users")
 
-st.title("Hello")
-for row in users_rows:
-    st.write(f"{row[0]}'s email is {row[1]}")
+# st.title("Hello")
+# for row in users_rows:
+#     st.write(f"{row[0]}'s email is {row[1]}")
+
