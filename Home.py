@@ -8,6 +8,9 @@ from copy import deepcopy
 import altair as alt
 from datetime import datetime as dt
 import mysql.connector
+import streamlit_authenticator as stauth
+
+st.title("Hello")
 
 def init_connection():
     return mysql.connector.connect(**st.secrets["mysql"])
@@ -20,9 +23,23 @@ def run_query(query):
         cur.execute(query)
         return cur.fetchall()
 
-# users_rows = run_query("select * from users")
+names = ['Jahnvi Raj Singh', 'Ben Low']
+emails = ['jahnvi.singh@rttechlaw.com', 'ben.low@rttechlaw.com']
+passwords = ['123', '456']
+hashed_passwords = stauth.hasher(passwords).generate()
 
-# st.title("Hello")
+authenticator = stauth.authenticate(names, emails, hashed_passwords, 'Jahnvi203', '83582042', cookie_expiry_days = 30)
+
+name, authentication_status = authenticator.login('Login', 'sidebar')
+
+if authentication_status:
+    st.write('Welcome *%s*' % (name))
+ # your application
+elif authentication_status == False:
+    st.error('Username/password is incorrect')
+elif authentication_status == None:
+    st.warning('Please enter your username and password')
+
+# users_rows = run_query("select * from users")
 # for row in users_rows:
 #     st.write(f"{row[0]}'s email is {row[1]}")
-
