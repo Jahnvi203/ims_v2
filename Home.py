@@ -9,20 +9,23 @@ import altair as alt
 from datetime import datetime as dt
 import mysql.connector
 import streamlit_authenticator as stauth
+import pymongo
 
 st.title("Hello")
 
 def init_connection():
-    return mysql.connector.connect(**st.secrets["mysql"])
+    return pymongo.MongoClient(**st.secrets["mongo"])
 
-conn = init_connection()
+client = init_connection()
 
 @st.experimental_memo(ttl=600)
-def run_query(query):
-    with conn.cursor() as cur:
-        cur.execute(query)
-        return cur.fetchall()
+def get_data():
+    db = client.ims
+    items = db.mycollection.find()
+    items = list(items)
+    return items
 
-users_rows = run_query("select * from users")
-for row in users_rows:
-    st.write(f"{row[0]}'s email is {row[1]}")
+items = get_data()
+
+for item in items:
+    st.write(f"{item['name']}'s email is {item['email']}")

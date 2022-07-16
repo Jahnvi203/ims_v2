@@ -1,2 +1,2 @@
-mysql-connector-python==8.0.29
+pymongo=4.1.1
 streamlit-authenticator==0.2.1
