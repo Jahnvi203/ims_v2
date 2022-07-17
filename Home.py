@@ -8,7 +8,6 @@ from copy import deepcopy
 import altair as alt
 from datetime import datetime as dt
 from supabase import create_client, Client
-import streamlit_authenticator as stauth
 from time import sleep
 
 @st.experimental_singleton
