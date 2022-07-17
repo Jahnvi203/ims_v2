@@ -20,9 +20,9 @@ supabase = init_connection()
 
 @st.experimental_memo(ttl=600)
 def run_query():
-    return supabase.table("streamlit_ims").select("*").execute()
+    return supabase.table("users").select("*").execute()
 
 rows = run_query()
 
 for row in rows.data:
-    st.write(f"{row['name']}'s email is '{row['pet']}")
+    st.write(f"{row['name']}'s email is {row['email']}")
