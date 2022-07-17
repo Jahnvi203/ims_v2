@@ -7,25 +7,22 @@ from pandas import ExcelWriter, read_csv
 from copy import deepcopy
 import altair as alt
 from datetime import datetime as dt
-import mysql.connector
-import streamlit_authenticator as stauth
-import pymongo
+from supabase import create_client, Client
 
-st.title("Hello")
-
+# Connecting to Supabase database
+@st.experimental_singleton
 def init_connection():
-    return pymongo.MongoClient(**st.secrets["mongo"])
+    url = st.secrets["supabase_url"]
+    key = st.secrets["supabase_key"]
+    return create_client(url, key)
 
-client = init_connection()
+supabase = init_connection()
 
 @st.experimental_memo(ttl=600)
-def get_data():
-    db = client.ims
-    items = db.mycollection.find()
-    items = list(items)
-    return items
+def run_query():
+    return supabase.table("streamlit_ims").select("*").execute()
 
-items = get_data()
+rows = run_query()
 
-for item in items:
-    st.write(f"{item['name']}'s email is {item['email']}")
+for row in rows.data:
+    st.write(f"{row['name']}'s email is '{row['pet']}")

@@ -1,2 +1,1 @@
-pymongo=4.1.1
-streamlit-authenticator==0.2.1
+supabase==0.5.8
