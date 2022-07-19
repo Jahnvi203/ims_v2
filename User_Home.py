@@ -52,7 +52,7 @@ st.title("Welcome to R&TT's Inventory Management System")
 
 # Login page
 login_heading = st.empty()
-login_heading_show = login_heading.subheader("Login")
+login_heading_show = login_heading.subheader("User Home Login")
 login_email = st.empty()
 login_email_show = login_email.text_input("Email")
 login_password = st.empty()
@@ -61,8 +61,8 @@ login_button = st.empty()
 login_button_show = login_button.button("Login")
 
 def viewYourCurrentAssg(name, email):
-    myAssg_heading = st.empty()
-    myAssg_heading_show = myAssg_heading.subheader("My Current Assignments")
+    myCurrentAssg_heading = st.empty()
+    myCurrentAssg_heading_show = myCurrentAssg_heading.subheader("My Current Assignments")
     your_current_assg = []
     for row in existing_assignments:
         if row[2] == name and row[5]:
@@ -71,12 +71,15 @@ def viewYourCurrentAssg(name, email):
     your_current_assg_df_show = st.dataframe(your_current_assg_df)
     return
 
-def viewAssg(name, email):
-    searchAssg_heading = st.empty()
-    searchAssg_heading_show = searchAssg_heading.subheader("View All Assignments")
-    existing_assignments_df = st.empty()
-    existing_assignments_df_actual = pd.DataFrame(existing_assignments, columns = ["Device No.", "Device Type", "Assigned To", "Assigned From", "Assigned Till", "Current Assignment", "Assigned By"])
-    existing_assignments_df_show = existing_assignments_df.dataframe(existing_assignments_df_actual)
+def viewYourPastAssg(name, email):
+    myPastAssg_heading = st.empty()
+    myPastAssg_heading_show = myPastAssg_heading.subheader("My Current Assignments")
+    your_past_assg = []
+    for row in existing_assignments:
+        if row[2] == name and not row[5]:
+            your_past_assg.append([row[0], row[1], row[3], row[4], row[6]])
+    your_past_assg_df = pd.DataFrame(your_past_assg, columns = ["Device No.", "Device Type", "Assigned From", "Assigned Till", "Assigned By"])
+    your_past_assg_df_show = st.dataframe(your_past_assg_df)
     return
 
 if login_button_show:
@@ -102,8 +105,5 @@ if login_button_show:
                 login_button.empty()
                 user_type = existing_users_types[login_email_index]
                 name = existing_users_names[login_email_index]
-                if user_type == "admin":
-                    viewYourCurrentAssg(name, login_email_show)
-                    viewAssg(name, login_email_show)
-                elif user_type == "user":
-                    viewYourCurrentAssg(name, login_email_show)
+                viewYourCurrentAssg(name, login_email_show)
+                viewYourPastAssg(name, login_email_show)
