@@ -11,8 +11,6 @@ from supabase import create_client, Client
 from time import sleep
 from math import ceil
 
-from zmq import device
-
 @st.experimental_singleton
 def init_connection():
     url = st.secrets["supabase_url"]
