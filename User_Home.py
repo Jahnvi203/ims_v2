@@ -73,7 +73,7 @@ def viewYourCurrentAssg(name, email):
 
 def viewYourPastAssg(name, email):
     myPastAssg_heading = st.empty()
-    myPastAssg_heading_show = myPastAssg_heading.subheader("My Current Assignments")
+    myPastAssg_heading_show = myPastAssg_heading.subheader("My Past Assignments")
     your_past_assg = []
     for row in existing_assignments:
         if row[2] == name and not row[5]:
