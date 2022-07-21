@@ -45,9 +45,6 @@ for row in existing_users_rows.data:
     existing_users_passwords.append(row['password'])
     existing_users_types.append(row['user_type'])
 
-def insert_new_user(name, email, password):
-    return supabase.table("users").insert({'name': name, 'email': email, 'password': password, 'user_type': 'user'}).execute()
-
 st.title("Welcome to R&TT's Inventory Management System")
 
 # Login page

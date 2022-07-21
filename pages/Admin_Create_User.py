@@ -89,8 +89,8 @@ def createNewUser():
                     else:
                         password_error.empty()
                 else:
-                    supabase.table("users").insert({'name': user_name, 'email': user_email, 'password': user_confirm_password, 'user_type': user_type}).execute()
                     create_success_show = create_success.markdown("The User has been created successfully.")
+                    return supabase.table("users").insert({'name': user_name, 'email': user_email, 'password': user_confirm_password, 'user_type': user_type}).execute()
     return
 
 st.title("Welcome to R&TT's Inventory Management System")
