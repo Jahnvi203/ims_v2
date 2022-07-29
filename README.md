@@ -57,4 +57,4 @@ To start using the app, please go to https://jahnvi203-ims-v2-user-home-2ht775.s
 
 **TROUBLESHOOTING**
 
-In case of any issues with the app, please submit an issue on GitHub at https://github.com/Jahnvi203/lupl_app/issues along with any description or attachments that may help with understanding the issue.
+In case of any issues with the app, please submit an issue on GitHub at https://github.com/Jahnvi203/ims_v2/issues along with any description or attachments that may help with understanding the issue.
